@@ -2,9 +2,9 @@ import React from 'react';
 
 const Player = (props) => {
     return ( 
-        <div>
+        <div className="team col-sm-6">
             <p>Name: {props.name}</p>
-            {props.score}
+            <p className="score">{props.score}</p>
             <button onClick={props.scoreFive}>5</button>
             <button onClick={props.scoreTen}>10</button>
             <button onClick={props.scoreFifteen}>15</button>

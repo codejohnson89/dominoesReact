@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 
 import Player from './components/Player'
 
+import index from '../styles/index.scss'
+
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -68,7 +70,7 @@ class App extends React.Component {
             return {
                 score: prevState.score.map((value, index) => index === key ? value + 30 : value)
             }
-        })
+        })        
     }
 
     scoreThirtyFive(key) {
@@ -114,11 +116,15 @@ class App extends React.Component {
         })
     }
 
+
     render() { 
         return ( 
-            <div>
-                <h1>Dominoes</h1>
-                <p>Game: {this.state.gameCount}</p>
+            <div className="container">
+            <h1>Dominoes</h1>
+            <p>Game: {this.state.gameCount}</p>
+                <div className="row main-content">
+                
+               
                 <Player 
                 key={1} 
                 name="Player 1"
@@ -170,11 +176,13 @@ class App extends React.Component {
                     scoreThirtyFive={this.state.score[3]} scoreThirtyFive={() => this.scoreThirtyFive(3)}
                     /> : <div></div>}
                     
-                
+                </div>
+                <div className="row">
                 <button onClick={this.newGame}>New Game</button>
                 <button onClick={this.addPlayer}>Add Player</button>
                 <button onClick={this.removePlayer}>Remove Player</button>
                 <button onClick={this.resetBoard}>Reset Board</button>
+                </div>
             </div>
          );
     }

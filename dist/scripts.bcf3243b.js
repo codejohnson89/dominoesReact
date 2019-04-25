@@ -25761,7 +25761,11 @@ var _react = _interopRequireDefault(require("react"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Player = function Player(props) {
-  return _react.default.createElement("div", null, _react.default.createElement("p", null, "Name: ", props.name), props.score, _react.default.createElement("button", {
+  return _react.default.createElement("div", {
+    className: "team col-sm-6"
+  }, _react.default.createElement("p", null, "Name: ", props.name), _react.default.createElement("p", {
+    className: "score"
+  }, props.score), _react.default.createElement("button", {
     onClick: props.scoreFive
   }, "5"), _react.default.createElement("button", {
     onClick: props.scoreTen
@@ -25780,7 +25784,79 @@ var Player = function Player(props) {
 
 var _default = Player;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js"}],"scripts/index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
+
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
+  }
+
+  return bundleURL;
+}
+
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
+
+    if (matches) {
+      return getBaseURL(matches[0]);
+    }
+  }
+
+  return '/';
+}
+
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
+}
+
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"../node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+var bundle = require('./bundle-url');
+
+function updateLink(link) {
+  var newLink = link.cloneNode();
+
+  newLink.onload = function () {
+    link.remove();
+  };
+
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+
+var cssTimeout = null;
+
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
+
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
+      }
+    }
+
+    cssTimeout = null;
+  }, 50);
+}
+
+module.exports = reloadCSS;
+},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"styles/index.scss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"./..\\images\\bkgrd.jpg":[["bkgrd.89b41cca.jpg","images/bkgrd.jpg"],"images/bkgrd.jpg"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"scripts/index.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -25788,6 +25864,8 @@ var _react = _interopRequireDefault(require("react"));
 var _reactDom = _interopRequireDefault(require("react-dom"));
 
 var _Player = _interopRequireDefault(require("./components/Player"));
+
+var _index = _interopRequireDefault(require("../styles/index.scss"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -25966,7 +26044,11 @@ function (_React$Component) {
           _React$createElement3,
           _React$createElement4;
 
-      return _react.default.createElement("div", null, _react.default.createElement("h1", null, "Dominoes"), _react.default.createElement("p", null, "Game: ", this.state.gameCount), _react.default.createElement(_Player.default, (_React$createElement = {
+      return _react.default.createElement("div", {
+        className: "container"
+      }, _react.default.createElement("h1", null, "Dominoes"), _react.default.createElement("p", null, "Game: ", this.state.gameCount), _react.default.createElement("div", {
+        className: "row main-content"
+      }, _react.default.createElement(_Player.default, (_React$createElement = {
         key: 1,
         name: "Player 1",
         score: this.state.score[0],
@@ -26042,7 +26124,9 @@ function (_React$Component) {
         return _this2.scoreThirty(3);
       }), _defineProperty(_React$createElement4, "scoreThirtyFive", this.state.score[3]), _defineProperty(_React$createElement4, "scoreThirtyFive", function scoreThirtyFive() {
         return _this2.scoreThirtyFive(3);
-      }), _React$createElement4)) : _react.default.createElement("div", null), _react.default.createElement("button", {
+      }), _React$createElement4)) : _react.default.createElement("div", null)), _react.default.createElement("div", {
+        className: "row"
+      }, _react.default.createElement("button", {
         onClick: this.newGame
       }, "New Game"), _react.default.createElement("button", {
         onClick: this.addPlayer
@@ -26050,7 +26134,7 @@ function (_React$Component) {
         onClick: this.removePlayer
       }, "Remove Player"), _react.default.createElement("button", {
         onClick: this.resetBoard
-      }, "Reset Board"));
+      }, "Reset Board")));
     }
   }]);
 
@@ -26058,7 +26142,7 @@ function (_React$Component) {
 }(_react.default.Component);
 
 _reactDom.default.render(_react.default.createElement(App, null), document.getElementById('app'));
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./components/Player":"scripts/components/Player.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./components/Player":"scripts/components/Player.js","../styles/index.scss":"styles/index.scss"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -26086,7 +26170,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55947" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51551" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
